@@ -1,6 +1,8 @@
 from datetime import datetime
 
+from ckeditor.fields import RichTextField
 from django.db import models
+from multiselectfield import MultiSelectField
 
 
 # Create your models here.
@@ -93,13 +95,13 @@ class Car(models.Model):
     year = models.IntegerField('year', choices=year_choice)
     condition = models.CharField(max_length=255)
     price = models.IntegerField()
-    description = models.TextField(max_length=255)
+    description = RichTextField()
     car_photo = models.ImageField(upload_to='images/%y/%m/%d/')
     car_photo_1 = models.ImageField(upload_to='images/%y/%m/%d/', blank=True)
     car_photo_2 = models.ImageField(upload_to='images/%y/%m/%d/', blank=True)
     car_photo_3 = models.ImageField(upload_to='images/%y/%m/%d/', blank=True)
     car_photo_4 = models.ImageField(upload_to='images/%y/%m/%d/', blank=True)
-    features = models.CharField(choices=features_choices, max_length=100)
+    features = MultiSelectField(choices=features_choices)
     body_style = models.CharField(max_length=255)
     engine = models.CharField(max_length=255)
     transmission = models.CharField(max_length=255)
@@ -107,9 +109,12 @@ class Car(models.Model):
     miles = models.IntegerField()
     doors = models.CharField(choices=door_choices, max_length=10)
     passengers = models.IntegerField()
-    vin_no = models.CharField(max_length=100)
+    vin_no = models.CharField(max_length=255)
     milage = models.IntegerField()
     fuel_type = models.CharField(max_length=50)
     no_of_owners = models.CharField(max_length=100)
     is_featured = models.BooleanField(default=False)
     created_date = models.DateTimeField(default=datetime.now, blank=True)
+
+    def __str__(self):
+        return self.car_title
