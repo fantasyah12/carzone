@@ -38,7 +38,7 @@ def register(request):
                     messages.error(request, 'Email already exists!')
                     return redirect('register')
                 else:
-                    user = User.objects.create_user(first_name=firstname, last_name=lastname, username=username,email=email, password=password)
+                    user = User.objects.create_user(first_name=firstname, last_name=lastname, username=username, email=email, password=password)
                     auth.login(request, user)
                     messages.success(request, 'you are now logged in.')
                     return redirect('dashboard')
@@ -56,4 +56,8 @@ def dashboard(request):
     return render(request, 'accounts/dashboard.html')
 
 def logout(request):
+    if request.method == 'POST':
+        auth.logout(request)
+        messages.success(request, 'You are successfully logged out.')
+        return redirect('home')
     return redirect('home')
