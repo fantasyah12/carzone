@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% block title %} | {{single_car.car_title}} {% endblock %}
 {% block content %}
 
 {% load humanize %}
@@ -237,7 +238,7 @@
                                     </div>
 
                                 <div class="form-group">
-                                  <input type="text" name="car_title" class="form-control" value="LAMBORGHINI HURACÁN." readonly>
+                                  <input type="text" name="car_title" class="form-control" value="{{single_car.car_title}}" readonly>
                                 </div>
 
                                 <div class="form-group">
@@ -281,13 +282,13 @@
                         <h5 class="sidebar-title">Get a Question?</h5>
                         <ul class="contact-info">
                             <li>
-                                <i class="flaticon-pin"></i>20/F Green Road, Dhanmondi
+                                <i class="flaticon-pin"></i>Nguyen Van Linh, District 7, Ho Chi Minh City
                             </li>
                             <li>
-                                <i class="flaticon-mail"></i><a href="mailto:info@themevessel.com">info@themevessel.com</a>
+                                <i class="flaticon-mail"></i><a href="mailto:info@themevessel.com">support@buzonow.com</a>
                             </li>
                             <li>
-                                <i class="flaticon-phone"></i><a href="tel:+0477-85x6-552">+0477 85x6 552</a>
+                                <i class="flaticon-phone"></i><a href="tel:+0477-85x6-552">+84346 664 665</a>
                             </li>
                         </ul>
                         <div class="social-list clearfix">

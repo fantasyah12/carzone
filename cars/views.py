@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Car
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
+
+
 # Create your views here.
 def cars(request):
 
@@ -12,7 +14,6 @@ def cars(request):
 
     try:
         paged_cars = paginator.get_page(page)
-        print(paged_cars)
     except PageNotAnInteger:
         paged_cars = paginator.get_page(1)
     except EmptyPage:
@@ -23,6 +24,9 @@ def cars(request):
     city_search = Car.objects.values_list('city', flat=True).distinct()
     body_style_search = Car.objects.values_list('body_style', flat=True).distinct()
     year_search = Car.objects.values_list('year', flat=True).distinct()
+    # Count a mount of items in database
+    car_inventory = Car.objects.count()
+
     # Blind Data
     data = {
         'cars': paged_cars,
@@ -30,6 +34,7 @@ def cars(request):
         'city_search': city_search,
         'body_style_search': body_style_search,
         'year_search': year_search,
+        'car_inventory':car_inventory,
     }
     return render(request, 'cars/cars.html', data)
 
